@@ -1,12 +1,13 @@
 
-import java.io.DataInputStream;
+//import java.io.DataInputStream;
 import java.io.File;
-import java.io.FileInputStream;
+//import java.io.FileInputStream;
 import java.io.FileOutputStream;
 //import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.URL;
+import java.util.StringTokenizer;
 
 
 //import org.xml.sax.InputSource;
@@ -60,15 +61,20 @@ public class pwextractor {
     System.setOut(out);  		     			  //write output to file
     
 	String[] lines = text.split("[.]+");  		  //Split string into lines 
-	for(int i=0; i<lines.length; i++){		    
-		StringBuffer result = new StringBuffer();
+	StringBuffer result = new StringBuffer();
+	for(int i=0; i<lines.length; i++){			
 		result.append(lines[i]);
-		String pwStr = result.toString();		  //Convert Stringbuffer Array into String
-		System.out.println(pwStr);				  //Print Array
+		String tmpStr = result.toString();         //Convert Stringbuffer Array into String
+		//for(String pwStr : tmpStr.split("\\s+")) System.out.println(pwStr.charAt(0));
+		//System.out.println(tmpStr);				  //Print Array
+	    StringTokenizer st = new StringTokenizer(tmpStr, " ");
+	    while (st.hasMoreTokens()) {
+	    	String word = st.nextToken();
+	    	//Get the first character from the word
+	        char firstChar = word.charAt(0);
+	        System.out.println(firstChar);
+	    }
 	}
-    
-	
 	//inStream.close();
-	
   }
 }
